@@ -1,0 +1,6 @@
+﻿  main.cpp
+     Creating library C:\Users\andressp2\MyAwesomeGame\AndroDunosDemos\x64\Debug\project class.lib and object C:\Users\andressp2\MyAwesomeGame\AndroDunosDemos\x64\Debug\project class.exp
+LIBCMT.lib(exe_winmain.obj) : error LNK2019: unresolved external symbol WinMain referenced in function "int __cdecl __scrt_common_main_seh(void)" (?__scrt_common_main_seh@@YAHXZ)
+..\SDL\libx86\SDl2.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+..\SDL\libx86\SDl2main.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Users\andressp2\MyAwesomeGame\AndroDunosDemos\x64\Debug\project class.exe : fatal error LNK1120: 1 unresolved externals
