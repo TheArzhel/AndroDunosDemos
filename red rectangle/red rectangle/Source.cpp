@@ -1,10 +1,8 @@
 #include "SDL/include/SDL.h"
 #include <stdio.h>
 using namespace std;
-
 #pragma comment (lib,"SDL/libx86/SDL2.lib")
 #pragma comment (lib,"SDL/libx86/SDL2main.lib")
-
 
 int main(int argc, char* argv[]) {
 
@@ -23,8 +21,6 @@ int main(int argc, char* argv[]) {
 
 	SDL_SetRenderDrawColor(render, 0, 100, 136, 256);//set the color
 	SDL_RenderClear(render);//implement the color
-
-
 
 	SDL_Rect square; // square def
 	square.x = 500;
@@ -52,7 +48,6 @@ int main(int argc, char* argv[]) {
 		if (square.x == 0) { xsq = 0; }
 		if (square.y == 0) { ysq = 0; }
 
-
 		if (square.x < 1000 && xsq == 0) { //right mov
 			square.x++;
 		}
@@ -71,13 +66,8 @@ int main(int argc, char* argv[]) {
 		SDL_RenderFillRect(render, &square); // square fill
 
 		SDL_RenderPresent(render); //update the window
+		SDL_Delay(6);
 	}
-
-	
-
-	
-
-	
 	//SDL_Delay(3000); //waiting  10 sec to next execution
 	//SDL_DestroyWindow(window);
 
