@@ -1,15 +1,12 @@
 ﻿  Source.cpp
-Source.cpp(22): warning C4305: 'argument': truncation from 'int' to 'Uint8'
-Source.cpp(22): warning C4309: 'argument': truncation of constant value
-Source.cpp(31): warning C4305: 'argument': truncation from 'int' to 'Uint8'
-Source.cpp(31): warning C4309: 'argument': truncation of constant value
-Source.cpp(42): warning C4305: 'argument': truncation from 'int' to 'Uint8'
-Source.cpp(42): warning C4309: 'argument': truncation of constant value
-Source.cpp(65): warning C4305: 'argument': truncation from 'int' to 'Uint8'
-Source.cpp(65): warning C4309: 'argument': truncation of constant value
+Source.cpp(34): warning C4305: 'argument': truncation from 'int' to 'Uint8'
+Source.cpp(34): warning C4309: 'argument': truncation of constant value
+Source.cpp(57): warning C4305: 'argument': truncation from 'int' to 'Uint8'
+Source.cpp(57): warning C4309: 'argument': truncation of constant value
      Creating library C:\Users\andressp2\MyAwesomeGame\AndroDunosDemos\red rectangle\Release\red rectangle.lib and object C:\Users\andressp2\MyAwesomeGame\AndroDunosDemos\red rectangle\Release\red rectangle.exp
   Generating code
-c:\users\andressp2\myawesomegame\androdunosdemos\red rectangle\red rectangle\source.cpp(76): warning C4715: 'SDL_main': not all control paths return a value
-  All 5 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 1 functions (100.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   red rectangle.vcxproj -> C:\Users\andressp2\MyAwesomeGame\AndroDunosDemos\red rectangle\Release\red rectangle.exe

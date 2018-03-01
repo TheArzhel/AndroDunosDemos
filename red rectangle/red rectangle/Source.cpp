@@ -15,24 +15,16 @@ int main(int argc, char* argv[]) {
 	//check window
 	if (window == NULL) {
 
-		printf("error creating the window %s\n", SDL_GetError());
 		return 1;
 	}
 
-	SDL_SetRenderDrawColor(render, 0, 100, 136, 256);//set the color
-	SDL_RenderClear(render);//implement the color
 
 	SDL_Rect square; // square def
 	square.x = 500;
 	square.y = 500;
 	square.h = 100;
 	square.w = 100;
-	SDL_RenderDrawRect(render, &square); //draw square
-	SDL_SetRenderDrawColor(render, 255, 0, 0, 256);//set the color of rectagle
-	SDL_RenderFillRect(render, &square); // square fill
-
-	SDL_RenderPresent(render); //update the window
-
+	
 	int i = 0;
 	int xsq = 0; // if goes to right
 	int ysq = 0; // goes up
@@ -68,9 +60,9 @@ int main(int argc, char* argv[]) {
 		SDL_RenderPresent(render); //update the window
 		SDL_Delay(6);
 	}
-	//SDL_Delay(3000); //waiting  10 sec to next execution
-	//SDL_DestroyWindow(window);
+	SDL_Delay(3000); //waiting  10 sec to next execution
+	SDL_DestroyWindow(window);
 
-	//SDL_Quit(); // cleans the surfaces to avoid memory leaks
-	//return 0;
+	SDL_Quit(); // cleans the surfaces to avoid memory leaks
+	return 0;
 }
