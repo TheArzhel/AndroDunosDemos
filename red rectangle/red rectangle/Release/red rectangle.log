@@ -10,8 +10,6 @@ Source.cpp(65): warning C4309: 'argument': truncation of constant value
      Creating library C:\Users\andressp2\MyAwesomeGame\AndroDunosDemos\red rectangle\Release\red rectangle.lib and object C:\Users\andressp2\MyAwesomeGame\AndroDunosDemos\red rectangle\Release\red rectangle.exp
   Generating code
 c:\users\andressp2\myawesomegame\androdunosdemos\red rectangle\red rectangle\source.cpp(76): warning C4715: 'SDL_main': not all control paths return a value
-  1 of 5 functions (20.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  All 5 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   red rectangle.vcxproj -> C:\Users\andressp2\MyAwesomeGame\AndroDunosDemos\red rectangle\Release\red rectangle.exe

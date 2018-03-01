@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
 	SDL_Window* window; // to create a window, first make a ponter, then we specify
 	SDL_Renderer* render; // pointer to render
 
-	window = SDL_CreateWindow("red square", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1000, 1000, SDL_WINDOW_OPENGL); // name, position x, y, size, windows flag
+	window = SDL_CreateWindow("red square", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1000, 1000, SDL_WINDOW_SHOWN); // name, position x, y, size, windows flag
 	render = SDL_CreateRenderer(window, -1, 0); // contex for a window
 	//check window
 	if (window == NULL) {
