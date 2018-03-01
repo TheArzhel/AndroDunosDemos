@@ -1,8 +1,8 @@
 ﻿  Source.cpp
 Source.cpp(34): warning C4305: 'argument': truncation from 'int' to 'Uint8'
 Source.cpp(34): warning C4309: 'argument': truncation of constant value
-Source.cpp(57): warning C4305: 'argument': truncation from 'int' to 'Uint8'
-Source.cpp(57): warning C4309: 'argument': truncation of constant value
+Source.cpp(38): warning C4305: 'argument': truncation from 'int' to 'Uint8'
+Source.cpp(38): warning C4309: 'argument': truncation of constant value
      Creating library C:\Users\andressp2\MyAwesomeGame\AndroDunosDemos\red rectangle\Release\red rectangle.lib and object C:\Users\andressp2\MyAwesomeGame\AndroDunosDemos\red rectangle\Release\red rectangle.exp
   Generating code
   1 of 1 functions (100.0%) were compiled, the rest were copied from previous compilation.

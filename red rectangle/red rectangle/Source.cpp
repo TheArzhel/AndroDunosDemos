@@ -34,25 +34,6 @@ int main(int argc, char* argv[]) {
 		SDL_SetRenderDrawColor(render, 0, 100, 136, 256);//set the color
 		SDL_RenderClear(render);//implement the color
 
-		if (square.x == 1000) { xsq = 1; }
-		if (square.y == 1000) { ysq = 1; }
-
-		if (square.x == 0) { xsq = 0; }
-		if (square.y == 0) { ysq = 0; }
-
-		if (square.x < 1000 && xsq == 0) { //right mov
-			square.x++;
-		}
-		if (square.x > 0 && xsq == 1) { // left movement
-				square.x--;
-		}
-
-		if (square.y < 1000 && ysq == 0) { //up mov
-			square.y++;
-		}
-		if (square.y > 0 && ysq == 1) { // down movement
-			square.y--;
-		}
 		SDL_RenderDrawRect(render, &square); //draw square
 		SDL_SetRenderDrawColor(render, 255, 0, 0, 256);//set the color of rectagle
 		SDL_RenderFillRect(render, &square); // square fill
@@ -60,6 +41,7 @@ int main(int argc, char* argv[]) {
 		SDL_RenderPresent(render); //update the window
 		SDL_Delay(6);
 	}
+
 	SDL_Delay(3000); //waiting  10 sec to next execution
 	SDL_DestroyWindow(window);
 
