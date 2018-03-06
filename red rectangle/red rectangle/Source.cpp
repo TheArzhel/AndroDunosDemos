@@ -1,48 +1,49 @@
 #include "SDL/include/SDL.h"
-#include <stdio.h>
-using namespace std;
+
 #pragma comment (lib,"SDL/libx86/SDL2.lib")
 #pragma comment (lib,"SDL/libx86/SDL2main.lib")
 
 enum KeyPress { KEY_PRESS_SURFACE_SPACE, KEY_PRESS_SURFACE_UP, KEY_PRESS_SURFACE_DOWN, KEY_PRESS_SURFACE_LEFT, KEY_PRESS_SURFACE_RIGHT, KEY_PRESS_SURFACE_ESC };
 
-void movesquare(int keypressed, SDL_Rect* square) {
-	int movement = 10;
-
-	switch (keypressed) {
-
-
-	case KEY_PRESS_SURFACE_UP:
-		if (square->y != 0) {
-			square->y -= movement;
-			
-		};
-		break;
-
-	case KEY_PRESS_SURFACE_DOWN:
-		if (square->y != 900) {
-			square -> y += movement;
-
-		}
-		break;
-
-	case KEY_PRESS_SURFACE_RIGHT:
-		if (square->x != 900) {
-			square->x += movement;
-
-		};
-		break;
-
-	case KEY_PRESS_SURFACE_LEFT:
-		if (square->x != 0) {
-			square->x -= movement;
-
-		}
-		break;
-	}
-
-
-}
+//void movesquare(int keypressed, SDL_Rect* square,bool state) {
+//	int movement = 10;
+//	int i = 0;
+//	switch (keypressed) {
+//
+//
+//	case KEY_PRESS_SURFACE_UP:
+//
+//
+//		if (square->y != 0 && state==true) {
+//		 square->y -= movement; }
+//			break; 
+//			
+//		
+//
+//	case KEY_PRESS_SURFACE_DOWN:
+//		if (square->y != 900) {
+//			square -> y += movement;
+//
+//		}
+//		break;
+//
+//	case KEY_PRESS_SURFACE_RIGHT:
+//		if (square->x != 900) {
+//			square->x += movement;
+//
+//		};
+//		break;
+//
+//	case KEY_PRESS_SURFACE_LEFT:
+//		if (square->x != 0) {
+//			square->x -= movement;
+//
+//		}
+//		break;
+//	}
+//
+//
+//}
 
 void createlaser(SDL_Rect* laser, SDL_Rect square) {
 	
@@ -53,6 +54,7 @@ void createlaser(SDL_Rect* laser, SDL_Rect square) {
 
 
 }
+
 void movelaser(SDL_Rect* laser, SDL_Renderer* render) {
 	laser->x++;
 
@@ -61,6 +63,7 @@ void movelaser(SDL_Rect* laser, SDL_Renderer* render) {
 	
 
 }
+
 int main(int argc, char* argv[]) {
 
 	SDL_Init(SDL_INIT_VIDEO); //initialize the library and video functions abailable
@@ -79,7 +82,7 @@ int main(int argc, char* argv[]) {
 	
 
 
-	SDL_Rect square, laser;// square def
+	SDL_Rect square, laser; // square def
 	square.x = 500;
 	square.y = 500;
 	square.h = 100;
@@ -87,6 +90,9 @@ int main(int argc, char* argv[]) {
 	
 
 	bool quit = false;
+	bool RightKey = false, LeftKey= false, UpKey=false, DownKey= false;
+
+
 	SDL_Event event; 
 	
 	while (quit==false) {
@@ -95,31 +101,68 @@ int main(int argc, char* argv[]) {
 
 			if (event.type == SDL_QUIT) {
 				quit = true;
-			} else if (event.type == SDL_KEYDOWN) {
 
-				const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
+			} if (event.type == SDL_KEYDOWN) {
 
-				{
-					if (currentKeyStates[SDL_SCANCODE_SPACE]) {
+				switch (event.key.keysym.sym) {
+
+				case SDLK_SPACE:
 						createlaser(&laser, square);
-					}
-					if (currentKeyStates[SDL_SCANCODE_UP]) {
-						movesquare(KEY_PRESS_SURFACE_UP, &square);
-					}
-					if (currentKeyStates[SDL_SCANCODE_DOWN]) {
-						movesquare(KEY_PRESS_SURFACE_DOWN, &square);
-					}
-					if (currentKeyStates[SDL_SCANCODE_RIGHT]) {
-						movesquare(KEY_PRESS_SURFACE_RIGHT, &square);
-					}
-					if (currentKeyStates[SDL_SCANCODE_LEFT]) {
-						movesquare(KEY_PRESS_SURFACE_LEFT, &square);
-					}
-					if (currentKeyStates[SDL_SCANCODE_ESCAPE]) {
-						quit = true;
-					}
-		
+						break;
+					
+				case SDLK_UP:
+						UpKey = true;
+						if (square->y != 0 && state == true) {
+						square->y -= movement; }
+						break;
+					
+				case SDLK_DOWN:
+						DownKey = true;
+						movesquare(KEY_PRESS_SURFACE_DOWN, &square, DownKey);
+						break;
 
+				case SDLK_RIGHT:
+						RightKey = true;
+						movesquare(KEY_PRESS_SURFACE_RIGHT, &square, RightKey);
+						break;
+
+				case SDLK_LEFT:
+						LeftKey = true;
+						movesquare(KEY_PRESS_SURFACE_LEFT, &square, LeftKey);
+						break;
+
+				case SDLK_ESCAPE:
+						quit = true;
+						break;
+
+				default: 
+					break;
+
+				}
+			}
+
+			if (event.type = SDL_KEYUP) {
+				
+				switch (event.key.keysym.sym) {
+
+				case SDLK_UP:
+					UpKey = false;
+					break;
+
+				case SDLK_DOWN:
+					DownKey = false;
+					break; 
+
+				case SDLK_RIGHT:
+					RightKey = false;
+					break;
+
+				case SDLK_LEFT:
+					LeftKey = false;
+					break;
+
+				default:
+					break;
 
 				}
 
@@ -130,18 +173,17 @@ int main(int argc, char* argv[]) {
 		
 		SDL_SetRenderDrawColor(render, 0, 100, 136, 256);//set the color
 		SDL_RenderClear(render);//implement the color
-
+		movelaser(&laser, render);
 		SDL_RenderDrawRect(render, &square); //draw square
 		SDL_SetRenderDrawColor(render, 255, 0, 0, 256);//set the color of rectagle
 		SDL_RenderFillRect(render, &square); // square fill
-		movelaser(&laser, render); 
 		SDL_RenderPresent(render); //update the window
 		SDL_Delay(6);
 	}
 
-	SDL_Delay(3000); //waiting  10 sec to next execution
+	SDL_Delay(30); //waiting  10 sec to next execution
+	SDL_DestroyRenderer(render);
 	SDL_DestroyWindow(window);
-
 	SDL_Quit(); // cleans the surfaces to avoid memory leaks
 	return 0;
 }
