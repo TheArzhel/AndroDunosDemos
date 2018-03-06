@@ -1,6 +1,7 @@
 #include "SDL/include/SDL.h"
 #include <stdio.h>
 using namespace std;
+
 #pragma comment (lib,"SDL/libx86/SDL2.lib")
 #pragma comment (lib,"SDL/libx86/SDL2main.lib")
 
