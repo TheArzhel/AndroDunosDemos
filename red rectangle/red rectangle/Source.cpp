@@ -1,9 +1,18 @@
 #include "SDL/include/SDL.h"
 #include "SDL_images/include/SDL_image.h"
+//#include <string>
+
 
 #pragma comment (lib,"SDL/libx86/SDL2.lib")
 #pragma comment (lib,"SDL/libx86/SDL2main.lib")
 #pragma comment (lib,"SDL_images/libx86/SDL2_image.lib")
+
+SDL_Window* window; // to create a window, first make a ponter, then we specify
+SDL_Renderer* render; // pointer to render
+
+//image 
+//SDL_Texture* LoadTexture(std::string file);
+//SDL_Texture* texture = NULL;
 
 
 enum KeyPress { KEY_PRESS_SURFACE_SPACE, KEY_PRESS_SURFACE_UP, KEY_PRESS_SURFACE_DOWN, KEY_PRESS_SURFACE_LEFT, KEY_PRESS_SURFACE_RIGHT, KEY_PRESS_SURFACE_ESC };
@@ -33,9 +42,7 @@ int main(int argc, char* argv[]) {
 	
 	SDL_Init(SDL_INIT_VIDEO); //initialize the library and video functions abailable
 	
-	SDL_Window* window; // to create a window, first make a ponter, then we specify
-	SDL_Renderer* render; // pointer to render
-
+	
 	window = SDL_CreateWindow("red square", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1000, 1000, SDL_WINDOW_SHOWN); // name, position x, y, size, windows flag
 	render = SDL_CreateRenderer(window, -1, 0); // contex for a window
 	//check window
@@ -45,17 +52,21 @@ int main(int argc, char* argv[]) {
 
 		return 1;
 	}
-	SDL_Surface* ScreenSurface=NULL;
-	SDL_Surface*Fondo=NULL;
 
-	ScreenSurface = SDL_GetWindowSurface(window);
-	Fondo = SDL_LoadBMP("../Game/imagen.bmp");
-	SDL_BlitSurface(Fondo, NULL, ScreenSurface, NULL);
+	
+
+	//else {
+		//ScreenSurface = SDL_GetWindowSurface(window);
+		//Fondo = SDL_LoadBMP("../Game/image.bmp");
+		//SDL_BlitSurface(Fondo, NULL, ScreenSurface, NULL);
+	//}
+	
+	
 
 
 
 	int c = 0; // counter
-	SDL_Rect square,laser[50]; // square def
+	SDL_Rect square, laser[50]; // square def
 	square.x = 500;
 	square.y = 500;
 	square.h = 100;
@@ -72,6 +83,8 @@ int main(int argc, char* argv[]) {
 
 	
 
+	
+
 	while (quit==false) {
 
 		while (SDL_PollEvent(&event) != 0) {
@@ -81,7 +94,17 @@ int main(int argc, char* argv[]) {
 				quit = true;
 			} 
 
-			if (Fondo == NULL) { quit = true; }
+			/*texture = LoadTexture("image.png");
+			if (texture == NULL  ) {
+				quit = true;
+			}
+			
+			int imgFlags = IMG_INIT_PNG;
+			if (!(IMG_Init(imgFlags) & imgFlags))
+			{
+				quit = true;
+			}*/
+			
 
 			else if (event.type == SDL_KEYDOWN) {
 
@@ -171,10 +194,10 @@ int main(int argc, char* argv[]) {
 			square.x -= movement;
 		}
 
-		//SDL_SetRenderDrawColor(render, 0, 100, 136, 255);//set the color
+		SDL_SetRenderDrawColor(render, 0, 100, 136, 255);//set the color
 		
-		SDL_UpdateWindowSurface(window);
-		//SDL_RenderClear(render);//implement the color
+		//SDL_UpdateWindowSurface(window);
+		SDL_RenderClear(render);//implement the color
 
 		if (bullet == true) {
 			for (int j = 0; j < c; j++) {
@@ -185,18 +208,18 @@ int main(int argc, char* argv[]) {
 			
 		}
 		
-		//SDL_RenderDrawRect(render, &square); //draw square
-		//SDL_SetRenderDrawColor(render, 255, 0, 0, 255);//set the color of rectagle
-		//SDL_RenderFillRect(render, &square); // square fill
-		//SDL_RenderPresent(render); //update the window
+		SDL_RenderDrawRect(render, &square); //draw square
+		SDL_SetRenderDrawColor(render, 255, 0, 0, 255);//set the color of rectagle
+		SDL_RenderFillRect(render, &square); // square fill
+		SDL_RenderPresent(render); //update the window
 
 		
 		SDL_Delay(6);
 
 	}
 
-	SDL_FreeSurface(Fondo);
-	Fondo = NULL;
+	/*SDL_FreeSurface(Fondo);
+	Fondo = NULL;*/
 
 	SDL_Delay(30); //waiting to next execution
 	SDL_DestroyRenderer(render);
@@ -204,3 +227,24 @@ int main(int argc, char* argv[]) {
 	SDL_Quit(); // cleans the surfaces to avoid memory leaks
 	return 0;
 }
+
+
+//SDL_Texture* LoadTexture(std::string file)
+//{
+//	SDL_Texture* newTexture = NULL;
+//
+//	SDL_Surface* loadedSurface = IMG_Load(file.c_str());
+//
+//	if (loadedSurface == NULL)
+//	{
+//	}
+//	else
+//	{
+//		newTexture = SDL_CreateTextureFromSurface(render, loadedSurface);
+//
+//		if (newTexture == NULL)
+//		SDL_FreeSurface(loadedSurface);
+//	}
+//
+//	return newTexture;
+//}
