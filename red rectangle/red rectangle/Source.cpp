@@ -1,7 +1,10 @@
 #include "SDL/include/SDL.h"
+#include "SDL_images/include/SDL_image.h"
 
 #pragma comment (lib,"SDL/libx86/SDL2.lib")
 #pragma comment (lib,"SDL/libx86/SDL2main.lib")
+#pragma comment (lib,"SDL_images/libx86/SDL2_image.lib")
+
 
 enum KeyPress { KEY_PRESS_SURFACE_SPACE, KEY_PRESS_SURFACE_UP, KEY_PRESS_SURFACE_DOWN, KEY_PRESS_SURFACE_LEFT, KEY_PRESS_SURFACE_RIGHT, KEY_PRESS_SURFACE_ESC };
 
