@@ -1,4 +1,4 @@
-#include "SDL/include/SDL.h"
+#include "SDL/inclde/SDL.h"
 #include "SDL_images/include/SDL_image.h"
 
 #pragma comment (lib,"SDL/libx86/SDL2.lib")
@@ -30,7 +30,9 @@ void movelaser(SDL_Rect* laser, SDL_Renderer* render) {
 
 int main(int argc, char* argv[]) {
 
+	
 	SDL_Init(SDL_INIT_VIDEO); //initialize the library and video functions abailable
+	IMG_Init(IMG_INIT_PNG);
 	SDL_Window* window; // to create a window, first make a ponter, then we specify
 	SDL_Renderer* render; // pointer to render
 
@@ -176,7 +178,9 @@ int main(int argc, char* argv[]) {
 		SDL_Delay(6);
 	}
 
+	
 	SDL_Delay(30); //waiting to next execution
+	//IMG_Quit();
 	SDL_DestroyRenderer(render);
 	SDL_DestroyWindow(window);
 	SDL_Quit(); // cleans the surfaces to avoid memory leaks
