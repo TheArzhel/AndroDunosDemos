@@ -8,45 +8,6 @@
 
 enum KeyPress { KEY_PRESS_SURFACE_SPACE, KEY_PRESS_SURFACE_UP, KEY_PRESS_SURFACE_DOWN, KEY_PRESS_SURFACE_LEFT, KEY_PRESS_SURFACE_RIGHT, KEY_PRESS_SURFACE_ESC };
 
-//void movesquare(int keypressed, SDL_Rect* square,bool state) {
-//	int movement = 10;
-//	int i = 0;
-//	switch (keypressed) {
-//
-//
-//	case KEY_PRESS_SURFACE_UP:
-//
-//
-//		if (square->y != 0 && state==true) {
-//		 square->y -= movement; }
-//			break; 
-//			
-//		
-//
-//	case KEY_PRESS_SURFACE_DOWN:
-//		if (square->y != 900) {
-//			square -> y += movement;
-//
-//		}
-//		break;
-//
-//	case KEY_PRESS_SURFACE_RIGHT:
-//		if (square->x != 900) {
-//			square->x += movement;
-//
-//		};
-//		break;
-//
-//	case KEY_PRESS_SURFACE_LEFT:
-//		if (square->x != 0) {
-//			square->x -= movement;
-//
-//		}
-//		break;
-//	}
-//
-//
-//}
 
 void createlaser(SDL_Rect* laser, SDL_Rect square) {
 	
