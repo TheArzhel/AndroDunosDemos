@@ -81,8 +81,8 @@ int main(int argc, char* argv[]) {
 	}
 	
 
-
-	SDL_Rect square, laser; // square def
+	int c = 0; // counter
+	SDL_Rect square,laser[50]; // square def
 	square.x = 500;
 	square.y = 500;
 	square.h = 100;
@@ -90,59 +90,69 @@ int main(int argc, char* argv[]) {
 	
 
 	bool quit = false;
-	bool RightKey = false, LeftKey= false, UpKey=false, DownKey= false;
+	bool RightKey = false, LeftKey = false, UpKey = false, DownKey = false, bullet = false;
 
 
 	SDL_Event event; 
 	
+	int movement = 10;
+
 	while (quit==false) {
 
 		while (SDL_PollEvent(&event) != 0) {
 
-			if (event.type == SDL_QUIT) {
+			if (event.type == SDL_QUIT)
+			{
 				quit = true;
+			} 
 
-			} if (event.type == SDL_KEYDOWN) {
+			else if (event.type == SDL_KEYDOWN) {
 
 				switch (event.key.keysym.sym) {
 
 				case SDLK_SPACE:
-						createlaser(&laser, square);
-						break;
+
+					createlaser(&laser[c], square);
+					c++;
+					bullet = true;
 					
+
+					break;
+
 				case SDLK_UP:
-						UpKey = true;
-						if (square->y != 0 && state == true) {
-						square->y -= movement; }
-						break;
-					
+					UpKey = true;
+					break;
+
 				case SDLK_DOWN:
-						DownKey = true;
-						movesquare(KEY_PRESS_SURFACE_DOWN, &square, DownKey);
-						break;
+					DownKey = true;
+
+					break;
 
 				case SDLK_RIGHT:
-						RightKey = true;
-						movesquare(KEY_PRESS_SURFACE_RIGHT, &square, RightKey);
-						break;
+					RightKey = true;
+
+					break;
 
 				case SDLK_LEFT:
-						LeftKey = true;
-						movesquare(KEY_PRESS_SURFACE_LEFT, &square, LeftKey);
-						break;
+					LeftKey = true;
+
+					break;
 
 				case SDLK_ESCAPE:
-						quit = true;
-						break;
+					quit = true;
+					break;
 
-				default: 
+				default:
 					break;
 
 				}
+
+				
+				
 			}
 
-			if (event.type = SDL_KEYUP) {
-				
+			else if (event.type = SDL_KEYUP) {
+
 				switch (event.key.keysym.sym) {
 
 				case SDLK_UP:
@@ -151,7 +161,7 @@ int main(int argc, char* argv[]) {
 
 				case SDLK_DOWN:
 					DownKey = false;
-					break; 
+					break;
 
 				case SDLK_RIGHT:
 					RightKey = false;
@@ -165,23 +175,44 @@ int main(int argc, char* argv[]) {
 					break;
 
 				}
-
-
 			}
 		}
-		
-		
-		SDL_SetRenderDrawColor(render, 0, 100, 136, 256);//set the color
+
+		if (square.y != 0 && UpKey == true) {
+			square.y -= movement;
+		}
+
+		if (square.y != 900 && DownKey == true) {
+			square.y += movement;
+		}
+
+		if (square.x != 900 && RightKey == true) {
+			square.x += movement;
+		}
+
+		if (square.x != 0 && LeftKey == true) {
+			square.x -= movement;
+		}
+
+		SDL_SetRenderDrawColor(render, 0, 100, 136, 255);//set the color
 		SDL_RenderClear(render);//implement the color
-		movelaser(&laser, render);
+		
+		if (bullet == true) {
+			for (int j = 0; j < c; j++) {
+				++laser[j].x;
+				SDL_SetRenderDrawColor(render, 0, 255, 0, 255);
+				SDL_RenderFillRect(render, &laser[j]);
+			}
+			
+		}
 		SDL_RenderDrawRect(render, &square); //draw square
-		SDL_SetRenderDrawColor(render, 255, 0, 0, 256);//set the color of rectagle
+		SDL_SetRenderDrawColor(render, 255, 0, 0, 255);//set the color of rectagle
 		SDL_RenderFillRect(render, &square); // square fill
 		SDL_RenderPresent(render); //update the window
 		SDL_Delay(6);
 	}
 
-	SDL_Delay(30); //waiting  10 sec to next execution
+	SDL_Delay(30); //waiting to next execution
 	SDL_DestroyRenderer(render);
 	SDL_DestroyWindow(window);
 	SDL_Quit(); // cleans the surfaces to avoid memory leaks
