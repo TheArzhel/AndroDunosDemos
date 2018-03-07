@@ -1,6 +1,6 @@
 #include "SDL/include/SDL.h"
 #include "SDL_images/include/SDL_image.h"
-//#include <string>
+#include <string>
 
 
 #pragma comment (lib,"SDL/libx86/SDL2.lib")
@@ -11,8 +11,8 @@ SDL_Window* window; // to create a window, first make a ponter, then we specify
 SDL_Renderer* render; // pointer to render
 
 //image 
-//SDL_Texture* LoadTexture(std::string file);
-//SDL_Texture* texture = NULL;
+SDL_Texture* LoadTexture(std::string file);
+SDL_Texture* texture = NULL;
 
 
 enum KeyPress { KEY_PRESS_SURFACE_SPACE, KEY_PRESS_SURFACE_UP, KEY_PRESS_SURFACE_DOWN, KEY_PRESS_SURFACE_LEFT, KEY_PRESS_SURFACE_RIGHT, KEY_PRESS_SURFACE_ESC };
@@ -54,12 +54,12 @@ int main(int argc, char* argv[]) {
 	}
 
 	
-
-	//else {
-		//ScreenSurface = SDL_GetWindowSurface(window);
-		//Fondo = SDL_LoadBMP("../Game/image.bmp");
-		//SDL_BlitSurface(Fondo, NULL, ScreenSurface, NULL);
-	//}
+/*
+	else {
+		ScreenSurface = SDL_GetWindowSurface(window);
+		Fondo = SDL_LoadBMP("../Game/image.bmp");
+		SDL_BlitSurface(Fondo, NULL, ScreenSurface, NULL);
+	}*/
 	
 	
 
@@ -94,7 +94,7 @@ int main(int argc, char* argv[]) {
 				quit = true;
 			} 
 
-			/*texture = LoadTexture("image.png");
+			texture = LoadTexture("image.png");
 			if (texture == NULL  ) {
 				quit = true;
 			}
@@ -103,7 +103,7 @@ int main(int argc, char* argv[]) {
 			if (!(IMG_Init(imgFlags) & imgFlags))
 			{
 				quit = true;
-			}*/
+			}
 			
 
 			else if (event.type == SDL_KEYDOWN) {
@@ -229,22 +229,22 @@ int main(int argc, char* argv[]) {
 }
 
 
-//SDL_Texture* LoadTexture(std::string file)
-//{
-//	SDL_Texture* newTexture = NULL;
-//
-//	SDL_Surface* loadedSurface = IMG_Load(file.c_str());
-//
-//	if (loadedSurface == NULL)
-//	{
-//	}
-//	else
-//	{
-//		newTexture = SDL_CreateTextureFromSurface(render, loadedSurface);
-//
-//		if (newTexture == NULL)
-//		SDL_FreeSurface(loadedSurface);
-//	}
-//
-//	return newTexture;
-//}
+SDL_Texture* LoadTexture(std::string file)
+{
+	SDL_Texture* newTexture = NULL;
+
+	SDL_Surface* loadedSurface = IMG_Load(file.c_str());
+
+	if (loadedSurface == NULL)
+	{
+	}
+	else
+	{
+		newTexture = SDL_CreateTextureFromSurface(render, loadedSurface);
+
+		if (newTexture == NULL)
+		SDL_FreeSurface(loadedSurface);
+	}
+
+	return newTexture;
+}
