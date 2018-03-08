@@ -1,5 +1,5 @@
 #include "SDL/include/SDL.h"
-#include "SDL_image/include/SDL_image.h"
+#include "SDL_Image/include/SDL_image.h"
 
 #pragma comment (lib,"SDL/libx86/SDL2.lib")
 #pragma comment (lib,"SDL/libx86/SDL2main.lib")
@@ -7,10 +7,6 @@
 
 SDL_Window* window; // to create a window, first make a ponter, then we specify
 SDL_Renderer* render; // pointer to render
-
-//image 
-//SDL_Texture* LoadTexture(std::string file);
-//SDL_Texture* texture = nullptr;
 
 
 enum KeyPress { KEY_PRESS_SURFACE_SPACE, KEY_PRESS_SURFACE_UP, KEY_PRESS_SURFACE_DOWN, KEY_PRESS_SURFACE_LEFT, KEY_PRESS_SURFACE_RIGHT, KEY_PRESS_SURFACE_ESC };
@@ -32,7 +28,7 @@ int main(int argc, char* argv[]) {
 
 	
 	SDL_Init(SDL_INIT_VIDEO); //initialize the library and video functions abailable
-	
+	IMG_Init(IMG_INIT_PNG);
 	
 	window = SDL_CreateWindow("red square", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1000, 1000, SDL_WINDOW_SHOWN); // name, position x, y, size, windows flag
 	render = SDL_CreateRenderer(window, -1, 0); // contex for a window
@@ -42,16 +38,6 @@ int main(int argc, char* argv[]) {
 
 		return 1;
 	}
-
-	
-
-	/*else {
-		ScreenSurface = SDL_GetWindowSurface(window);
-		Fondo = SDL_LoadBMP("../Game/image.bmp");
-		SDL_BlitSurface(Fondo, NULL, ScreenSurface, NULL);
-	}*/
-	
-	
 
 
 
@@ -71,6 +57,19 @@ int main(int argc, char* argv[]) {
 	
 	int movement = 5;
 
+	SDL_Texture* back=nullptr;
+	SDL_Texture* shiptxt=nullptr;
+	SDL_Surface* Background = IMG_Load("image.png");
+	//SDL_Surface *Ship = IMG_Load("ae86.png");
+	back = SDL_CreateTextureFromSurface(render, Background);
+	//shiptxt = SDL_CreateTextureFromSurface(render, Ship);
+	
+	/*if (back == nullptr || shiptxt == nullptr)
+	{
+		return -1;
+	}*/
+
+
 	
 
 	
@@ -84,16 +83,7 @@ int main(int argc, char* argv[]) {
 				quit = true;
 			} 
 
-			/*texture = LoadTexture("image.png");
-			if (texture == NULL  ) {
-				quit = true;
-			}
-			
-			int imgFlags = IMG_INIT_PNG;
-			if (!(IMG_Init(imgFlags) & imgFlags))
-			{
-				quit = true;
-			}*/
+	
 			
 
 			else if (event.type == SDL_KEYDOWN) {
@@ -186,7 +176,7 @@ int main(int argc, char* argv[]) {
 
 		SDL_SetRenderDrawColor(render, 0, 100, 136, 255);//set the color
 		
-		//SDL_UpdateWindowSurface(window);
+	
 		SDL_RenderClear(render);//implement the color
 
 		if (bullet == true) {
@@ -203,39 +193,18 @@ int main(int argc, char* argv[]) {
 		SDL_RenderFillRect(render, &square); // square fill
 		SDL_RenderPresent(render); //update the window
 
-		
 		SDL_Delay(2);
 
 	}
 
-	/*SDL_FreeSurface(Fondo);
-	Fondo = NULL;*/
+
 
 	SDL_Delay(30); //waiting to next execution
 	SDL_DestroyRenderer(render);
 	SDL_DestroyWindow(window);
 	SDL_Quit(); // cleans the surfaces to avoid memory leaks
+	IMG_Quit();
 	return 0;
 }
 
 
-//SDL_Texture* LoadTexture(std::string file)
-//{
-//	SDL_Texture* newTexture = nullptr;
-//
-//	SDL_Surface* loadedSurface = IMG_Load(file.c_str());
-//
-//	if (loadedSurface == nullptr)
-//	{
-//	}
-//	else
-//	{
-//		newTexture = SDL_CreateTextureFromSurface(render, loadedSurface);
-//
-//		if (newTexture == NULL)
-//		SDL_FreeSurface(loadedSurface);
-//	}
-//
-//	return newTexture;
-//}
-////funcion llamada version sdl 
