@@ -2,7 +2,6 @@
 #include "SDL_images/include/SDL_image.h"
 #include <string>
 
-
 #pragma comment (lib,"SDL/libx86/SDL2.lib")
 #pragma comment (lib,"SDL/libx86/SDL2main.lib")
 #pragma comment (lib,"SDL_images/libx86/SDL2_image.lib")
@@ -11,8 +10,8 @@ SDL_Window* window; // to create a window, first make a ponter, then we specify
 SDL_Renderer* render; // pointer to render
 
 //image 
-//SDL_Texture* LoadTexture(std::string file);
-//SDL_Texture* texture = NULL;
+SDL_Texture* LoadTexture(std::string file);
+SDL_Texture* texture = nullptr;
 
 
 enum KeyPress { KEY_PRESS_SURFACE_SPACE, KEY_PRESS_SURFACE_UP, KEY_PRESS_SURFACE_DOWN, KEY_PRESS_SURFACE_LEFT, KEY_PRESS_SURFACE_RIGHT, KEY_PRESS_SURFACE_ESC };
@@ -38,17 +37,16 @@ int main(int argc, char* argv[]) {
 	
 	window = SDL_CreateWindow("red square", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1000, 1000, SDL_WINDOW_SHOWN); // name, position x, y, size, windows flag
 	render = SDL_CreateRenderer(window, -1, 0); // contex for a window
+	
 	//check window
-
-
-	if (window == NULL) {
+	if (window == nullptr) {
 
 		return 1;
 	}
 
 	
-/*
-	else {
+
+	/*else {
 		ScreenSurface = SDL_GetWindowSurface(window);
 		Fondo = SDL_LoadBMP("../Game/image.bmp");
 		SDL_BlitSurface(Fondo, NULL, ScreenSurface, NULL);
@@ -87,16 +85,16 @@ int main(int argc, char* argv[]) {
 				quit = true;
 			} 
 
-			/*texture = LoadTexture("image.png");
+			texture = LoadTexture("image.png");
 			if (texture == NULL  ) {
 				quit = true;
-			}*/
+			}
 			
-			/*int imgFlags = IMG_INIT_PNG;
+			int imgFlags = IMG_INIT_PNG;
 			if (!(IMG_Init(imgFlags) & imgFlags))
 			{
 				quit = true;
-			}*/
+			}
 			
 
 			else if (event.type == SDL_KEYDOWN) {
@@ -221,23 +219,24 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
-//
-//SDL_Texture* LoadTexture(std::string file)
-//{
-//	SDL_Texture* newTexture = NULL;
-//
-//	SDL_Surface* loadedSurface = IMG_Load(file.c_str());
-//
-//	if (loadedSurface == NULL)
-//	{
-//	}
-//	else
-//	{
-//		newTexture = SDL_CreateTextureFromSurface(render, loadedSurface);
-//
-//		if (newTexture == NULL)
-//		SDL_FreeSurface(loadedSurface);
-//	}
-//
-//	return newTexture;
-//}
+
+SDL_Texture* LoadTexture(std::string file)
+{
+	SDL_Texture* newTexture = nullptr;
+
+	SDL_Surface* loadedSurface = IMG_Load(file.c_str());
+
+	if (loadedSurface == nullptr)
+	{
+	}
+	else
+	{
+		newTexture = SDL_CreateTextureFromSurface(render, loadedSurface);
+
+		if (newTexture == NULL)
+		SDL_FreeSurface(loadedSurface);
+	}
+
+	return newTexture;
+}
+//funcion llamada version sdl 
