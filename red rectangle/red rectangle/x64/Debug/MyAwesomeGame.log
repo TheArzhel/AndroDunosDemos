@@ -1,0 +1,19 @@
+﻿  Source.cpp
+Source.obj : error LNK2019: unresolved external symbol SDL_CreateWindow referenced in function SDL_main
+Source.obj : error LNK2019: unresolved external symbol SDL_DestroyWindow referenced in function SDL_main
+Source.obj : error LNK2019: unresolved external symbol SDL_PollEvent referenced in function SDL_main
+Source.obj : error LNK2019: unresolved external symbol SDL_CreateRenderer referenced in function SDL_main
+Source.obj : error LNK2019: unresolved external symbol SDL_SetRenderDrawColor referenced in function SDL_main
+Source.obj : error LNK2019: unresolved external symbol SDL_RenderClear referenced in function SDL_main
+Source.obj : error LNK2019: unresolved external symbol SDL_RenderDrawRect referenced in function SDL_main
+Source.obj : error LNK2019: unresolved external symbol SDL_RenderFillRect referenced in function SDL_main
+Source.obj : error LNK2019: unresolved external symbol SDL_RenderPresent referenced in function SDL_main
+Source.obj : error LNK2019: unresolved external symbol SDL_DestroyRenderer referenced in function SDL_main
+Source.obj : error LNK2019: unresolved external symbol SDL_Delay referenced in function SDL_main
+Source.obj : error LNK2019: unresolved external symbol SDL_Init referenced in function SDL_main
+Source.obj : error LNK2019: unresolved external symbol SDL_Quit referenced in function SDL_main
+LIBCMT.lib(exe_winmain.obj) : error LNK2019: unresolved external symbol WinMain referenced in function "int __cdecl __scrt_common_main_seh(void)" (?__scrt_common_main_seh@@YAHXZ)
+SDL\libx86\SDL2.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+SDL\libx86\SDL2main.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+SDL_Image\libx86\SDL2_image.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Users\andressp2\Documents\GitHub\AndroDunosDemos\red rectangle\red rectangle\x64\Debug\MyAwesomeGame.exe : fatal error LNK1120: 14 unresolved externals
