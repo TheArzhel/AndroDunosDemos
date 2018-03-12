@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
 	//initialize the library and video functions abailable
 	SDL_Init(SDL_INIT_VIDEO);
 	IMG_Init(IMG_INIT_PNG);
-
+	Mix_Init(MIX_INIT_OGG);
 
 	// square def
 	SDL_Rect square, laser[50];
@@ -63,6 +63,14 @@ int main(int argc, char* argv[]) {
 	back = SDL_CreateTextureFromSurface(render, Background);
 	shiptxt = SDL_CreateTextureFromSurface(render, Ship);
 	laserTexture = SDL_CreateTextureFromSurface(render, Laser);
+
+
+	//initialize music sounds
+	Mix_Music *bgm = nullptr;
+	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
+	bgm = Mix_LoadMUS("fight_pokemon.ogg");
+	Mix_VolumeMusic(100);
+	Mix_PlayMusic(bgm, -1); 
 
 	if ((back == nullptr || shiptxt == nullptr || laser == nullptr) && window == nullptr)
 	{
@@ -219,6 +227,8 @@ int main(int argc, char* argv[]) {
 		SDL_FreeSurface(Background);
 		SDL_FreeSurface(Ship);
 		SDL_FreeSurface(Laser);
+
+		Mix_FreeMusic(bgm);
 
 		SDL_DestroyWindow(window);
 		SDL_Quit(); // cleans the surfaces to avoid memory leaks
