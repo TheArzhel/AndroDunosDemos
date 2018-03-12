@@ -72,6 +72,10 @@ int main(int argc, char* argv[]) {
 	Mix_VolumeMusic(100);
 	Mix_PlayMusic(bgm, -1); 
 
+	//Initialize wav sounds
+	Mix_Chunk *shot = nullptr;
+	shot = Mix_LoadWAV("throw.wav");
+
 	if ((back == nullptr || shiptxt == nullptr || laser == nullptr) && window == nullptr)
 	{
 		return -1;
@@ -178,6 +182,7 @@ int main(int argc, char* argv[]) {
 				laser[c].x = square.x;
 				laser[c].y = square.y;
 				c++;
+				Mix_PlayChannel(2, shot, 0);
 				bullet = false;
 			}
 
@@ -192,7 +197,7 @@ int main(int argc, char* argv[]) {
 			{
 				laser[i].w = 120;
 				laser[i].h = 120;
-				laser[i].x += 10;
+				laser[i].x += 3;
 				//SDL_RenderFillRect(renderer, &greenRect[i]);
 				if (laser[i].x < 2000)
 				{
