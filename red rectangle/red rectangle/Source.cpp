@@ -1,9 +1,11 @@
 #include "SDL/include/SDL.h"
 #include "SDL_Image/include/SDL_image.h"
+#include "SDL_Mixer/include/SDL_mixer.h"
 
 #pragma comment (lib,"SDL/libx86/SDL2.lib")
 #pragma comment (lib,"SDL/libx86/SDL2main.lib")
 #pragma comment (lib,"SDL_Image/libx86/SDL2_image.lib")
+#pragma comment (lib,"SDL_Mixer/libx86/SDL2_mixer.lib")
 
 SDL_Window* window; // to create a window, first make a ponter, then we specify
 SDL_Renderer* render; // pointer to render
