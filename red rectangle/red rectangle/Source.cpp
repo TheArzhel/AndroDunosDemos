@@ -12,37 +12,37 @@ SDL_Event event;
 enum KeyPress { KEY_PRESS_SURFACE_SPACE, KEY_PRESS_SURFACE_UP, KEY_PRESS_SURFACE_DOWN, KEY_PRESS_SURFACE_LEFT, KEY_PRESS_SURFACE_RIGHT, KEY_PRESS_SURFACE_ESC };
 
 
-void createlaser(SDL_Rect* laser, SDL_Rect square) {
-	
-	laser->h = 20;
-	laser->w = 100; 
-	laser->x = square.x + square.w;
-	laser->y = square.y + square.h / 2 - laser->h / 2;
-
-
-}
+//void createlaser(SDL_Rect* laser, SDL_Rect square) {
+//	
+//	laser->h = 120;
+//	laser->w = 120; 
+//	laser->x = square.x + square.w;
+//	laser->y = square.y + square.h / 2 - laser->h / 2;
+//
+//
+//}
 
 
 
 int main(int argc, char* argv[]) {
 
 	//initialize the library and video functions abailable
-	SDL_Init(SDL_INIT_VIDEO); 
+	SDL_Init(SDL_INIT_VIDEO);
 	IMG_Init(IMG_INIT_PNG);
 
-	
+
 	// square def
-	SDL_Rect square, laser[50]; 
+	SDL_Rect square, laser[50];
 	square.x = 500;
 	square.y = 500;
 	square.h = 120;
 	square.w = 120;
-	
+
 	bool RightKey = false, LeftKey = false, UpKey = false, DownKey = false, bullet = false, quit = false;
 
 
 	// constants and counters
-	int c = 0; 
+	int c = 0;
 	int movement = 5;
 
 	// name, position x, y, size, windows flag
@@ -52,14 +52,17 @@ int main(int argc, char* argv[]) {
 
 	//Set the png background
 
-	SDL_Texture* back=nullptr;
-	SDL_Texture* shiptxt=nullptr;
+	SDL_Texture* back = nullptr;
+	SDL_Texture* shiptxt = nullptr;
+	SDL_Texture* laserTexture = nullptr;
 	SDL_Surface* Background = IMG_Load("image.png");
 	SDL_Surface *Ship = IMG_Load("pokebal.png");
+	SDL_Surface *Laser = IMG_Load("pokebal1.png");
 	back = SDL_CreateTextureFromSurface(render, Background);
 	shiptxt = SDL_CreateTextureFromSurface(render, Ship);
-	
-	if ((back == nullptr ||shiptxt==nullptr) && window == nullptr)
+	laserTexture = SDL_CreateTextureFromSurface(render, Laser);
+
+	if ((back == nullptr || shiptxt == nullptr || laser == nullptr) && window == nullptr)
 	{
 		return -1;
 	}
@@ -84,9 +87,6 @@ int main(int argc, char* argv[]) {
 					{
 
 					case SDLK_SPACE:
-
-						createlaser(&laser[c], square);
-						c++;
 						bullet = true;
 						break;
 
@@ -108,6 +108,7 @@ int main(int argc, char* argv[]) {
 
 					case SDLK_ESCAPE:
 						quit = true;
+
 						break;
 
 					default:
@@ -138,6 +139,7 @@ int main(int argc, char* argv[]) {
 						LeftKey = false;
 						break;
 
+
 					default:
 						break;
 
@@ -162,12 +164,11 @@ int main(int argc, char* argv[]) {
 
 			if (bullet == true)
 			{
-				for (int j = 0; j < c; j++)
-				{
-					laser[j].x += 10;
-					SDL_SetRenderDrawColor(render, 0, 255, 0, 255);
-					SDL_RenderFillRect(render, &laser[j]);
-				}
+				/*createlaser(&laser[c], square);*/
+				laser[c].x = square.x;
+				laser[c].y = square.y;
+				c++;
+				bullet = false;
 			}
 
 
@@ -176,15 +177,28 @@ int main(int argc, char* argv[]) {
 			SDL_RenderClear(render);
 			SDL_RenderCopy(render, back, NULL, NULL);
 
-		
-		
+
+			for (int i = 0; i < 50; ++i)
+			{
+				laser[i].w = 120;
+				laser[i].h = 120;
+				laser[i].x += 10;
+				//SDL_RenderFillRect(renderer, &greenRect[i]);
+				if (laser[i].x < 2000)
+				{
+					SDL_RenderCopy(render, laserTexture, NULL, &laser[i]);
+				}
+			}
+
+
+
 			//set color to rectangle
 			/*SDL_SetRenderDrawColor(render, 255, 0, 0, 255);
 			SDL_RenderDrawRect(render, &square);
 			SDL_RenderFillRect(render, &square);*/
 			SDL_RenderCopy(render, shiptxt, NULL, &square);
-			
-			
+
+
 			//update the window
 			SDL_RenderPresent(render);
 
@@ -194,17 +208,22 @@ int main(int argc, char* argv[]) {
 
 
 		SDL_Delay(30); //waiting to next execution
+
 		SDL_DestroyRenderer(render);
 		SDL_DestroyTexture(back);
 		SDL_DestroyTexture(shiptxt);
+		SDL_DestroyTexture(laserTexture);
+
 		SDL_FreeSurface(Background);
 		SDL_FreeSurface(Ship);
+		SDL_FreeSurface(Laser);
+
 		SDL_DestroyWindow(window);
 		SDL_Quit(); // cleans the surfaces to avoid memory leaks
 		IMG_Quit();
 		return 0;
 	}
-	
+
 }
 
 	
