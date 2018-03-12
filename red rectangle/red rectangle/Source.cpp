@@ -35,8 +35,8 @@ int main(int argc, char* argv[]) {
 	SDL_Rect square, laser[50]; 
 	square.x = 500;
 	square.y = 500;
-	square.h = 100;
-	square.w = 100;
+	square.h = 120;
+	square.w = 120;
 	
 	bool RightKey = false, LeftKey = false, UpKey = false, DownKey = false, bullet = false, quit = false;
 
@@ -46,20 +46,20 @@ int main(int argc, char* argv[]) {
 	int movement = 5;
 
 	// name, position x, y, size, windows flag
-	window = SDL_CreateWindow("red square", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1000, 1000, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("red square", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1920, 1200, SDL_WINDOW_SHOWN);
 	// contex for a window
 	render = SDL_CreateRenderer(window, -1, 0);
 
 	//Set the png background
 
 	SDL_Texture* back=nullptr;
-	/*SDL_Texture* shiptxt=nullptr;*/
+	SDL_Texture* shiptxt=nullptr;
 	SDL_Surface* Background = IMG_Load("image.png");
-	//SDL_Surface *Ship = IMG_Load("ae86.png");
+	SDL_Surface *Ship = IMG_Load("pokebal.png");
 	back = SDL_CreateTextureFromSurface(render, Background);
-	//shiptxt = SDL_CreateTextureFromSurface(render, Ship);
+	shiptxt = SDL_CreateTextureFromSurface(render, Ship);
 	
-	if (back == nullptr && window == nullptr)
+	if ((back == nullptr ||shiptxt==nullptr) && window == nullptr)
 	{
 		return -1;
 	}
@@ -150,10 +150,10 @@ int main(int argc, char* argv[]) {
 			if (square.y != 0 && UpKey == true) {
 				square.y -= movement;
 			}
-			if (square.y != 900 && DownKey == true) {
+			if (square.y != 1080 && DownKey == true) {
 				square.y += movement;
 			}
-			if (square.x != 900 && RightKey == true) {
+			if (square.x != 1800 && RightKey == true) {
 				square.x += movement;
 			}
 			if (square.x != 0 && LeftKey == true) {
@@ -179,9 +179,10 @@ int main(int argc, char* argv[]) {
 		
 		
 			//set color to rectangle
-			SDL_SetRenderDrawColor(render, 255, 0, 0, 255);
+			/*SDL_SetRenderDrawColor(render, 255, 0, 0, 255);
 			SDL_RenderDrawRect(render, &square);
-			SDL_RenderFillRect(render, &square);
+			SDL_RenderFillRect(render, &square);*/
+			SDL_RenderCopy(render, shiptxt, NULL, &square);
 			
 			
 			//update the window
@@ -194,6 +195,10 @@ int main(int argc, char* argv[]) {
 
 		SDL_Delay(30); //waiting to next execution
 		SDL_DestroyRenderer(render);
+		SDL_DestroyTexture(back);
+		SDL_DestroyTexture(shiptxt);
+		SDL_FreeSurface(Background);
+		SDL_FreeSurface(Ship);
 		SDL_DestroyWindow(window);
 		SDL_Quit(); // cleans the surfaces to avoid memory leaks
 		IMG_Quit();
