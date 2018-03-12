@@ -58,8 +58,8 @@ int main(int argc, char* argv[]) {
 	SDL_Texture* shiptxt = nullptr;
 	SDL_Texture* laserTexture = nullptr;
 	SDL_Surface* Background = IMG_Load("image.png");
-	SDL_Surface *Ship = IMG_Load("pokebal.png");
-	SDL_Surface *Laser = IMG_Load("pokebal1.png");
+	SDL_Surface *Ship = IMG_Load("master_hand.png");
+	SDL_Surface *Laser = IMG_Load("pokebal.png");
 	back = SDL_CreateTextureFromSurface(render, Background);
 	shiptxt = SDL_CreateTextureFromSurface(render, Ship);
 	laserTexture = SDL_CreateTextureFromSurface(render, Laser);
@@ -182,6 +182,7 @@ int main(int argc, char* argv[]) {
 				laser[c].x = square.x;
 				laser[c].y = square.y;
 				c++;
+				if (c == 50) { c = 0; }
 				Mix_PlayChannel(2, shot, 0);
 				bullet = false;
 			}
@@ -192,6 +193,11 @@ int main(int argc, char* argv[]) {
 			SDL_RenderClear(render);
 			SDL_RenderCopy(render, back, NULL, NULL);
 
+			//set color to rectangle
+			/*SDL_SetRenderDrawColor(render, 255, 0, 0, 255);
+			SDL_RenderDrawRect(render, &square);
+			SDL_RenderFillRect(render, &square);*/
+			SDL_RenderCopy(render, shiptxt, NULL, &square);
 
 			for (int i = 0; i < 50; ++i)
 			{
@@ -199,19 +205,11 @@ int main(int argc, char* argv[]) {
 				laser[i].h = 120;
 				laser[i].x += 3;
 				//SDL_RenderFillRect(renderer, &greenRect[i]);
-				if (laser[i].x < 2000)
+				if (laser[i].x < 1800)
 				{
 					SDL_RenderCopy(render, laserTexture, NULL, &laser[i]);
 				}
 			}
-
-
-
-			//set color to rectangle
-			/*SDL_SetRenderDrawColor(render, 255, 0, 0, 255);
-			SDL_RenderDrawRect(render, &square);
-			SDL_RenderFillRect(render, &square);*/
-			SDL_RenderCopy(render, shiptxt, NULL, &square);
 
 
 			//update the window
