@@ -19,6 +19,7 @@ public:
 	Application()
 	{
 		modules[0] = new ModuleDummy();
+		modules[1] = new DummyESC();
 		// TODO 7: Create your new module "DummyESC"
 		// it should check if player it ESC key use kbhit()
 		// http://www.cprogramming.com/fod/kbhit.html
@@ -50,13 +51,13 @@ public:
 		for (int i = 0; i < NUM_MODULES; ++i) {
 			ret = modules[i]->PreUpdate();
 			if (ret != update_status::UPDATE_CONTINUE)
-				return ret;
+			break;
 		}
 
 		for (int i = 0; i < NUM_MODULES; ++i) {
 			ret = modules[i]->Update();
 			if (ret != update_status::UPDATE_CONTINUE)
-				return ret;
+				break;
 		}
 
 		for (int i = 0; i < NUM_MODULES; ++i) {
@@ -64,7 +65,7 @@ public:
 			if (ret != update_status::UPDATE_CONTINUE)
 				return ret;
 		}
-
+		return ret;
 	}
 
 	// EXIT Update 
@@ -73,18 +74,16 @@ public:
 	{
 		bool rect = true;
 
-		for (int i = NUM_MODULES-1 ; i !=0; --i) {
+		for (int i = NUM_MODULES - 1; i != 0; --i) {
 			rect = modules[i]->CleanUp();
 			if (!rect)
 				break;
-
-			for (int i = 0; i < NUM_MODULES; ++i) {
-				rect = modules[i]->Update();
-				if (rect != update_status::UPDATE_CONTINUE)
-					return rect;
-			}
-			delete modules[i];
 		}
+			for (int i = 0; i < NUM_MODULES; ++i) {
+				delete modules[i];
+			}
+			
+		
 		return rect;
 
 

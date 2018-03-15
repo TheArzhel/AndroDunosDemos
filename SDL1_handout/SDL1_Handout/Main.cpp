@@ -70,6 +70,7 @@ int main()
 				}
 				main_return = EXIT_SUCCESS;
 				state = MAIN_EXIT;
+				break;
 
 			}
 		}
